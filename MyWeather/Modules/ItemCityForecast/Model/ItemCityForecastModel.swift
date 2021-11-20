@@ -6,7 +6,9 @@
 //
 
 import Foundation
-struct ItemCityForecastModel: Decodable {
+struct ItemCityForecastModel: Decodable, Identifiable {
+    let id = UUID()
+    
     var dateTime: Date
     var sunriseTime: UInt64
     var sunsetTime: UInt64

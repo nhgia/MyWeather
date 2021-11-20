@@ -26,7 +26,7 @@ struct ListForecastView: View {
                         Button(action: {
                             viewModel.onActionClearTextFld()
                         }) {
-                            return Image(systemName: "xmark.circle.fill").opacity(viewModel.searchText == "" ? 0 : 1)
+                            Image(systemName: "xmark.circle.fill").opacity(viewModel.searchText == "" ? 0 : 1)
                         }
                     }
                     .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
@@ -44,17 +44,25 @@ struct ListForecastView: View {
                 }
                 .padding(EdgeInsets(top: 2, leading: 16, bottom: 8, trailing: 16)).animation(.default)
 
-                List {
-//                    ForEach(array.filter{$0.hasPrefix(searchText) || searchText == ""}, id:\.self) {
-//                        searchText in Text(searchText)
-//                    }
-                    
+                if let model = viewModel.listForecastModel {
+                    List(model.listDays) { item in
+                        ItemCityForecastView(forecastModel: item, timeZone: model.timeZone, currentUnit: viewModel.currentUnit)
+                    }
+                    .listStyle(.plain).environment(\.defaultMinListRowHeight, 150)
                 }
-                .listStyle(.plain).environment(\.defaultMinListRowHeight, 150)
+                else {
+                    List {}
+                }
+                
             }
             .navigationBarTitle(Text("Weather Forecast"))
             .navigationBarTitleDisplayMode(.inline)
             .resignKeyboardOnDragGesture()
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(
+                    title: Text(viewModel.alertMessage)
+                )
+            }
         }
         .background(Color.init(UIColor.systemGray3))
     }
