@@ -10,14 +10,10 @@ struct ListForecastModel: Decodable {
     var listDays: [ItemCityForecastModel]
     var timeZone: TimeZone
     var name: String
-    var responseCode: String
-    var message: String
     
     enum CodingKeys: String, CodingKey {
         case listDays = "list"
         case city = "city"
-        case responseCode = "cod"
-        case message = "message"
     }
     
     enum CityCodingKeys: String, CodingKey {
@@ -29,8 +25,6 @@ struct ListForecastModel: Decodable {
         print(decoder)
         let values = try decoder.container(keyedBy: ListForecastModel.CodingKeys.self)
         self.listDays = (try? values.decode(Array<ItemCityForecastModel>.self, forKey: .listDays)) ?? []
-        self.responseCode = (try? values.decode(String.self, forKey: .responseCode)) ?? "404"
-        self.message = (try? values.decode(String.self, forKey: .responseCode)) ?? ""
         
         if let cityNested = try? values.nestedContainer(keyedBy: CityCodingKeys.self, forKey: .city) {
             let timeZoneSec = (try? cityNested.decode(Int.self, forKey: .timeZone)) ?? 0

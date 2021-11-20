@@ -27,12 +27,12 @@ final class ListForecastViewModel: ObservableObject {
     //MARK: - Methods
     func onTextFldDoneEdit() {
         let endpoint = NetworkEndpoints.listWeather(citySearchName: searchText, unit: currentUnit)
-        networkRequest.request(endpoint: endpoint) { [weak self] responseObject, errorObject in
-            if let responseObject = responseObject {
+        networkRequest.request(endpoint: endpoint) { [weak self] responseObject, statusResult in
+            if let responseObject = responseObject, let statusResult = statusResult, statusResult.responseCode == NetworkResultCode.success.rawValue {
                 self?.listForecastModel = responseObject
             }
             else {
-                self?.alertMessage = errorObject?.localizedDescription ?? "Unknow error occured."
+                self?.alertMessage = statusResult?.message ?? "Unknown error"
                 self?.showingAlert = true
             }
         }

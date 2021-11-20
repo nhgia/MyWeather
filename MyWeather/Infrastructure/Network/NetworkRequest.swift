@@ -15,18 +15,21 @@ class NetworkRequest<GenericType: Decodable> {
         return Session(configuration: configuration)
     }()
     
-    func request(endpoint: NetworkEndpoint, handlerResponse: ((_ responseObject: GenericType?,_ errorObject: Error?) -> Void)?) {
+    func request(endpoint: NetworkEndpoint, handlerResponse: ((_ responseObject: GenericType?,_ resultCodeObject: NetworkResponse?) -> Void)?) {
         guard let _url = endpoint.url else {
             print("URL is incorrect")
             return
         }
         
-        sessionManager.request(_url, method: endpoint.method, parameters: endpoint.queryParameters, headers: endpoint.headerParamaters).responseDecodable(of: GenericType.self) { response in
+        sessionManager.request(_url, method: endpoint.method, parameters: endpoint.queryParameters, headers: endpoint.headerParamaters).responseData { response in
             switch response.result {
             case .success(let _data):
-                handlerResponse?(_data, nil)
+                let decoder = JSONDecoder()
+                let resultCode = try? decoder.decode(NetworkResponse.self, from: _data)
+                let dataDecode = try? decoder.decode(GenericType.self, from: _data)
+                handlerResponse?(dataDecode, resultCode)
             case .failure(let err):
-                handlerResponse?(nil, err)
+                handlerResponse?(nil, NetworkResponse(code: String(err.responseCode ?? -1), message: err.localizedDescription))
             }
         }
     }

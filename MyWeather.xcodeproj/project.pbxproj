@@ -32,6 +32,8 @@
 		F1E534342748F5AF00564C3D /* ListForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E534332748F5AE00564C3D /* ListForecastModel.swift */; };
 		F1E534372748F78200564C3D /* ListForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E534362748F78200564C3D /* ListForecastViewModel.swift */; };
 		F1E5343A27496F6100564C3D /* ItemCityForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5343927496F6100564C3D /* ItemCityForecastViewModel.swift */; };
+		F1E5343C27499A1A00564C3D /* NetworkResultCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5343B27499A1A00564C3D /* NetworkResultCode.swift */; };
+		F1E5344027499B5700564C3D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5343F27499B5700564C3D /* NetworkResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,8 @@
 		F1E534332748F5AE00564C3D /* ListForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListForecastModel.swift; sourceTree = "<group>"; };
 		F1E534362748F78200564C3D /* ListForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListForecastViewModel.swift; sourceTree = "<group>"; };
 		F1E5343927496F6100564C3D /* ItemCityForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCityForecastViewModel.swift; sourceTree = "<group>"; };
+		F1E5343B27499A1A00564C3D /* NetworkResultCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResultCode.swift; sourceTree = "<group>"; };
+		F1E5343F27499B5700564C3D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,8 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				F1E5341F2748D14500564C3D /* NetworkRequest.swift */,
+				F1E5343F27499B5700564C3D /* NetworkResponse.swift */,
 				F1E534212748D18600564C3D /* NetworkEndpoint.swift */,
 				F1E534232748D29D00564C3D /* NetworkEndpoints.swift */,
+				F1E5343B27499A1A00564C3D /* NetworkResultCode.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -159,7 +165,6 @@
 		F14433612744F539001ADFEA /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				F144337327456AD7001ADFEA /* Main */,
 				F144337227456AC9001ADFEA /* CityForecast */,
 				F1B040472746DBCE00DFEB5B /* ItemCityForecast */,
 			);
@@ -209,13 +214,6 @@
 				F144337427456B73001ADFEA /* Model */,
 			);
 			path = CityForecast;
-			sourceTree = "<group>";
-		};
-		F144337327456AD7001ADFEA /* Main */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		F144337427456B73001ADFEA /* Model */ = {
@@ -493,11 +491,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1E534292748D5C300564C3D /* ConfigKey.swift in Sources */,
+				F1E5344027499B5700564C3D /* NetworkResponse.swift in Sources */,
 				F1E5342B2748D85200564C3D /* Configs.swift in Sources */,
 				F1E534372748F78200564C3D /* ListForecastViewModel.swift in Sources */,
 				F1E5343A27496F6100564C3D /* ItemCityForecastViewModel.swift in Sources */,
 				F144337F274575F4001ADFEA /* ResignKeyboardOnDragGesture.swift in Sources */,
 				F1C71392273FB50200A4DC96 /* ListForecastView.swift in Sources */,
+				F1E5343C27499A1A00564C3D /* NetworkResultCode.swift in Sources */,
 				F14433812745761C001ADFEA /* UIApplication+.swift in Sources */,
 				F1E534322748EF5E00564C3D /* WeatherDetailModel.swift in Sources */,
 				F1E534342748F5AF00564C3D /* ListForecastModel.swift in Sources */,
