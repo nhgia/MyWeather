@@ -14,6 +14,7 @@ final class ListForecastViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var showCancelButton: Bool = false
     @Published var showingAlert = false
+    @Published var isLoading = false
     
     fileprivate(set) var alertMessage: String = ""
     let currentUnit:UnitType = .celsius
@@ -25,15 +26,18 @@ final class ListForecastViewModel: ObservableObject {
     //MARK: - Initialization
     
     //MARK: - Methods
-    func onTextFldDoneEdit() {
+    func fetchListForecast() {
+        isLoading = true
         let endpoint = NetworkEndpoints.listWeather(citySearchName: searchText, unit: currentUnit)
         networkRequest.request(endpoint: endpoint) { [weak self] responseObject, statusResult in
+            self?.isLoading = false
             if let responseObject = responseObject, let statusResult = statusResult, statusResult.responseCode == NetworkResultCode.success.rawValue {
                 self?.listForecastModel = responseObject
             }
             else {
                 self?.alertMessage = statusResult?.message ?? "Unknown error"
                 self?.showingAlert = true
+                self?.listForecastModel = nil
             }
         }
     }

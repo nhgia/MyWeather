@@ -35,4 +35,14 @@ struct TempDayModel: Decodable {
         self.morning = try values.decode(Double.self, forKey: .morning)
     }
     
+    //for debugging purpose only
+    init() {
+        self.day = 10.0
+        self.min = 10.0
+        self.max = 10.0
+        self.night = 10.0
+        self.evening = 10.0
+        self.morning = 10.0
+    }
+    
 }

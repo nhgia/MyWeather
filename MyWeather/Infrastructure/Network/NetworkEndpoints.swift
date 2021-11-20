@@ -14,7 +14,7 @@ struct NetworkEndpoints {
             "q": citySearchName,
             "cnt": 7,
             "appid": Configs.backendId,
-            "unit": unit.rawValue
+            "units": unit.rawValue
         ]
         return NetworkEndpoint(method: .get, path: "data/2.5/forecast/daily", isFullPath: false, queryParameters: queryParams)
     }

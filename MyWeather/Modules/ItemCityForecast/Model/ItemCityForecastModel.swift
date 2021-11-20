@@ -41,4 +41,16 @@ struct ItemCityForecastModel: Decodable, Identifiable {
         self.weatherDetails = try values.decode(Array<WeatherDetailModel>.self, forKey: .weatherDetails)
     }
     
+    //for debugging purpose only
+    init() {
+        self.dateTime = Date(timeIntervalSince1970: 1637380800)
+        self.sunriseTime = 1637362270
+        self.sunsetTime = 1637362270
+        self.humidity = 88
+        self.pressure = 1000
+        self.temp = TempDayModel()
+        
+        self.weatherDetails = []
+    }
+    
 }

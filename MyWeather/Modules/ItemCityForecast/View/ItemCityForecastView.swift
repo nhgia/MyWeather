@@ -35,7 +35,7 @@ struct ItemCityForecastView: View {
                 .cacheMemoryOnly()
                 .resizable()
                 .aspectRatio(1, contentMode: .fit)
-                .frame(width: geometry.size.width * 0.2)
+                .frame(width: geometry.size.width * 0.15)
             }
         }.background(Color.init(UIColor.systemGray3))
     }
@@ -46,11 +46,10 @@ struct ItemCityForecastView: View {
     }
 }
 
-//struct ItemCityForecast_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ItemCityForecastView(forecastModel: <#ItemCityForecastModel#>, timeZone: <#TimeZone#>, currentUnit: <#UnitType#>)
-//          .environment(\.colorScheme, .light).previewLayout(.fixed(width: 400, height: 150))
-//        ItemCityForecastView(forecastModel: <#ItemCityForecastModel#>, timeZone: <#TimeZone#>, currentUnit: <#UnitType#>)
-//          .environment(\.colorScheme, .dark).previewLayout(.fixed(width: 400, height: 150))
-//    }
-//}
+struct ItemCityForecast_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        return ItemCityForecastView(forecastModel: ItemCityForecastModel(), timeZone: TimeZone.current, currentUnit: .celsius)
+          .environment(\.colorScheme, .light).previewLayout(.fixed(width: 400, height: 150))
+    }
+}
