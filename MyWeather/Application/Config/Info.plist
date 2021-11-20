@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>Backend Base URL</key>
+	<string>$(SERVER_BASE_URL)</string>
 	<key>CFBundleName</key>
 	<string>$(WEATHER_APP_NAME)</string>
 	<key>CFBundleShortVersionString</key>
