@@ -6,20 +6,31 @@
 //
 
 import SwiftUI
+import Kingfisher
+
 struct ItemCityForecastView: View {
+    @StateObject private var viewModel: ItemCityForecastViewModel
+    
     var body: some View {
         GeometryReader { geometry in
             HStack{
                 VStack(alignment: .leading, spacing: 6.0) {
-                    Text("Date: Thu, 10 Jun 2021").frame(maxWidth: .infinity, alignment: .leading)
-                    Text("Average Temperature: 30°C").frame(maxWidth: .infinity, alignment: .leading)
-                    Text("Pressure: 1018").frame(maxWidth: .infinity, alignment: .leading)
-                    Text("Humidity: 62%").frame(maxWidth: .infinity, alignment: .leading)
-                    Text("Description: sky is clear").frame(maxWidth: .infinity, alignment: .leading)
+                    Text(viewModel.dateString).frame(maxWidth: .infinity, alignment: .leading)
+                    Text(viewModel.avgTemp).frame(maxWidth: .infinity, alignment: .leading)
+                    Text(viewModel.pressure).frame(maxWidth: .infinity, alignment: .leading)
+                    Text(viewModel.humid).frame(maxWidth: .infinity, alignment: .leading)
+                    Text(viewModel.desc).frame(maxWidth: .infinity, alignment: .leading)
                 }.padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 12)).frame(width: geometry.size.width * 0.75)
-                Image(systemName: "cloud.heavyrain").resizable().aspectRatio(1, contentMode: .fit).frame(width: geometry.size.width * 0.1)
+                
+                let defaultImage = Image(systemName: "cloud.heavyrain").resizable().aspectRatio(1, contentMode: .fit).frame(width: geometry.size.width * 0.1)
+                KFImage(URL(string: viewModel.icon)).resizable().aspectRatio(1, contentMode: .fit).frame(width: geometry.size.width * 0.1)
             }
         }.background(Color.init(UIColor.systemGray3))
+    }
+    
+    init(forecastModel: ItemCityForecastModel, timeZone: TimeZone, currentUnit: UnitType) {
+        let itemViewModel = ItemCityForecastViewModel(forecastModel: forecastModel, timeZone: timeZone, currentUnit: currentUnit)
+        _viewModel = StateObject(wrappedValue: itemViewModel)
     }
 }
 

@@ -18,4 +18,15 @@ enum UnitType:String {
             self = .celsius
         }
     }
+    
+    func getStringRepresent() -> String {
+        switch self {
+        case .kelvin:
+            return "°K"
+        case .celsius:
+            return "°C"
+        case .fahrenheit:
+            return "°F"
+        }
+    }
 }

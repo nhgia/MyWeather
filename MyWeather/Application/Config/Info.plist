@@ -6,6 +6,8 @@
 	<string>6.0</string>
 	<key>Backend Base URL</key>
 	<string>$(SERVER_BASE_URL)</string>
+	<key>Backend Image URL</key>
+	<string>$(SERVER_IMAGE_BASE_URL)</string>
 	<key>CFBundleName</key>
 	<string>$(WEATHER_APP_NAME)</string>
 	<key>CFBundleShortVersionString</key>

@@ -6,17 +6,25 @@
 //
 
 import Foundation
-final class ListForecastViewModel: NSObject {
+final class ListForecastViewModel: ObservableObject {
+    //MARK: - Attributes
     private let networkRequest = NetworkRequest<ListForecastModel>()
-    fileprivate var listForecastModel: ListForecastModel?
     
-    //MARK:- Initialization
-    override init() {
-        super.init()
+    @Published var listForecastModel: ListForecastModel?
+    @Published var searchText = ""
+    @Published var showCancelButton: Bool = false
+    
+    typealias CallBack = () -> Void
+    
+    var bindingDataChanged: CallBack?
+    
+    //MARK: - Initialization
+    init() {
     }
     
-    func fetchListForecast(from cityName: String) {
-        let endpoint = NetworkEndpoints.listWeather(citySearchName: cityName, unit: .celsius)
+    //MARK: - Methods
+    func onTextFldDoneEdit() {
+        let endpoint = NetworkEndpoints.listWeather(citySearchName: searchText, unit: .celsius)
         networkRequest.request(endpoint: endpoint) { [weak self] responseObject, errorObject in
             if let responseObject = responseObject {
                 self?.listForecastModel = responseObject
@@ -25,5 +33,17 @@ final class ListForecastViewModel: NSObject {
                 
             }
         }
+    }
+    
+    func onTextFldEditingChanged(isEditing: Bool) {
+        showCancelButton = true
+    }
+    
+    func onActionClearTextFld() {
+        searchText = ""
+    }
+    
+    func onActionCancelButton() {
+        viewModel.showCancelButton = false
     }
 }

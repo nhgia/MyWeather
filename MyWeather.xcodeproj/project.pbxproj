@@ -31,6 +31,7 @@
 		F1E534322748EF5E00564C3D /* WeatherDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E534312748EF5E00564C3D /* WeatherDetailModel.swift */; };
 		F1E534342748F5AF00564C3D /* ListForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E534332748F5AE00564C3D /* ListForecastModel.swift */; };
 		F1E534372748F78200564C3D /* ListForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E534362748F78200564C3D /* ListForecastViewModel.swift */; };
+		F1E5343A27496F6100564C3D /* ItemCityForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E5343927496F6100564C3D /* ItemCityForecastViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		F1E534312748EF5E00564C3D /* WeatherDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailModel.swift; sourceTree = "<group>"; };
 		F1E534332748F5AE00564C3D /* ListForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListForecastModel.swift; sourceTree = "<group>"; };
 		F1E534362748F78200564C3D /* ListForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListForecastViewModel.swift; sourceTree = "<group>"; };
+		F1E5343927496F6100564C3D /* ItemCityForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCityForecastViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +246,7 @@
 		F1B040472746DBCE00DFEB5B /* ItemCityForecast */ = {
 			isa = PBXGroup;
 			children = (
+				F1E5343827496F5000564C3D /* ViewModel */,
 				F1B040492746DC0B00DFEB5B /* View */,
 				F1B040482746DBE800DFEB5B /* Model */,
 			);
@@ -338,6 +341,14 @@
 			isa = PBXGroup;
 			children = (
 				F1E534362748F78200564C3D /* ListForecastViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F1E5343827496F5000564C3D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F1E5343927496F6100564C3D /* ItemCityForecastViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -484,6 +495,7 @@
 				F1E534292748D5C300564C3D /* ConfigKey.swift in Sources */,
 				F1E5342B2748D85200564C3D /* Configs.swift in Sources */,
 				F1E534372748F78200564C3D /* ListForecastViewModel.swift in Sources */,
+				F1E5343A27496F6100564C3D /* ItemCityForecastViewModel.swift in Sources */,
 				F144337F274575F4001ADFEA /* ResignKeyboardOnDragGesture.swift in Sources */,
 				F1C71392273FB50200A4DC96 /* ListForecastView.swift in Sources */,
 				F14433812745761C001ADFEA /* UIApplication+.swift in Sources */,
@@ -712,6 +724,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

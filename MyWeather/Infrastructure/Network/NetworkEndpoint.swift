@@ -25,7 +25,7 @@ class NetworkEndpoint {
             self.url = URL(string: path)
         }
         else {
-            guard let serverBaseUrl = ConfigKey.infoForKey("Backend Base URL") else {
+            guard let serverBaseUrl = ConfigKey.getBackendBaseUrl() else {
                 fatalError("Cannot get server URL, please check the .xcconfig & info.plist file")
             }
             let urlPath:String = serverBaseUrl + path

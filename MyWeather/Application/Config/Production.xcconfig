@@ -12,3 +12,4 @@ WEATHER_APP_NAME = MyWeather
 WEATHER_APP_VERSION = 0.1
 WEATHER_APP_ID = com.mycompany.MyWeather
 SERVER_BASE_URL = https:\/\/api.openweathermap.org\/
+SERVER_IMAGE_BASE_URL = http:\/\/openweathermap.org\/img\/w\/

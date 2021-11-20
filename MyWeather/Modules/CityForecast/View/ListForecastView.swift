@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ListForecastView: View {
-    @State private var searchText = ""
-    @State private var showCancelButton: Bool = false
-    
-    var viewModel: ListForecastViewModel = ListForecastViewModel()
+    @StateObject private var viewModel: ListForecastViewModel = ListForecastViewModel()
     
     var body: some View {
         NavigationView {
@@ -20,16 +17,16 @@ struct ListForecastView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
 
-                        TextField("Enter city name", text: $searchText, onEditingChanged: { isEditing in
-                            self.showCancelButton = true
+                        TextField("Enter city name", text: $viewModel.searchText, onEditingChanged: { isEditing in
+                            viewModel.onTextFldEditingChanged(isEditing: isEditing)
                         }, onCommit: {
-                            onTextFldDoneEdit()
+                            viewModel.onTextFldDoneEdit()
                         }).foregroundColor(.primary)
-
+                        
                         Button(action: {
-                            self.searchText = ""
+                            viewModel.onActionClearTextFld()
                         }) {
-                            Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                            return Image(systemName: "xmark.circle.fill").opacity(viewModel.searchText == "" ? 0 : 1)
                         }
                     }
                     .padding(EdgeInsets(top: 12, leading: 8, bottom: 12, trailing: 8))
@@ -37,11 +34,10 @@ struct ListForecastView: View {
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(10.0)
 
-                    if showCancelButton  {
+                    if viewModel.showCancelButton  {
                         Button("Cancel") {
-                                UIApplication.shared.endEditing(true) // this must be placed before the other commands here
-                                self.searchText = ""
-                                self.showCancelButton = false
+                            UIApplication.shared.endEditing(true)
+                            viewModel.onActionCancelButton()
                         }
                         .foregroundColor(Color(.systemBlue))
                     }
@@ -61,11 +57,6 @@ struct ListForecastView: View {
             .resignKeyboardOnDragGesture()
         }
         .background(Color.init(UIColor.systemGray3))
-    }
-    
-    func onTextFldDoneEdit() {
-        print(searchText)
-        viewModel.fetchListForecast(from: searchText)
     }
 }
 
