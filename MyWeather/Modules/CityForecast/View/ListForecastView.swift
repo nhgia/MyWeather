@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ListForecastView: View {
-    private var models = [ "a", "b", "c" ]
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
-
+    
+    var viewModel: ListForecastViewModel = ListForecastViewModel()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -22,6 +23,7 @@ struct ListForecastView: View {
                         TextField("Enter city name", text: $searchText, onEditingChanged: { isEditing in
                             self.showCancelButton = true
                         }, onCommit: {
+                            onTextFldDoneEdit()
                         }).foregroundColor(.primary)
 
                         Button(action: {
@@ -50,9 +52,6 @@ struct ListForecastView: View {
 //                    ForEach(array.filter{$0.hasPrefix(searchText) || searchText == ""}, id:\.self) {
 //                        searchText in Text(searchText)
 //                    }
-                    ForEach(models, id:\.self) { item in
-                        ItemCityForecastView()
-                    }
                     
                 }
                 .listStyle(.plain).environment(\.defaultMinListRowHeight, 150)
@@ -63,14 +62,19 @@ struct ListForecastView: View {
         }
         .background(Color.init(UIColor.systemGray3))
     }
-}
-
-struct ListForecastView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListForecastView()
-          .environment(\.colorScheme, .light)
-//
-//            ListForecastView()
-//              .environment(\.colorScheme, .dark)
+    
+    func onTextFldDoneEdit() {
+        print(searchText)
+        viewModel.fetchListForecast(from: searchText)
     }
 }
+
+//struct ListForecastView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ListForecastView()
+//          .environment(\.colorScheme, .light)
+////
+////            ListForecastView()
+////              .environment(\.colorScheme, .dark)
+//    }
+//}

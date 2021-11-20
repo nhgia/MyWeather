@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-class NetworkRequest {
+class NetworkRequest<GenericType: Decodable> {
     let sessionManager: Session = {
         let configuration = URLSessionConfiguration.af.default
         configuration.timeoutIntervalForRequest = 10
@@ -15,23 +15,16 @@ class NetworkRequest {
         return Session(configuration: configuration)
     }()
     
-    func request<Type: Decodable>(endpoint: NetworkEndpoint, handlerResponse: ((_ responseObject: Type?,_ errorObject: Error?) -> Void)?) {
+    func request(endpoint: NetworkEndpoint, handlerResponse: ((_ responseObject: GenericType?,_ errorObject: Error?) -> Void)?) {
         guard let _url = endpoint.url else {
             print("URL is incorrect")
             return
         }
         
-        sessionManager.request(_url, method: endpoint.method, parameters: endpoint.queryParameters, encoding: JSONEncoding.default, headers: endpoint.headerParamaters).validate().responseData { response in
+        sessionManager.request(_url, method: endpoint.method, parameters: endpoint.queryParameters, headers: endpoint.headerParamaters).responseDecodable(of: GenericType.self) { response in
             switch response.result {
             case .success(let _data):
-                do {
-                    let decoder = JSONDecoder()
-                    let objectResponse = try decoder.decode(Type.self, from: _data)
-                    handlerResponse?(objectResponse, nil)
-                }
-                catch let err {
-                    handlerResponse?(nil, err)
-                }
+                handlerResponse?(_data, nil)
             case .failure(let err):
                 handlerResponse?(nil, err)
             }

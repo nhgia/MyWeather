@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 struct NetworkEndpoints {
-    static func getListWeather(citySearchName: String, unit: UnitType) -> NetworkEndpoint {
+    static func listWeather(citySearchName: String, unit: UnitType) -> NetworkEndpoint {
         let queryParams: Parameters = [
             "q": citySearchName,
             "cnt": 7,
