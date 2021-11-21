@@ -11,34 +11,34 @@ My name is Gia Nguyen. If you have any question or further information, feel fre
 
 ### Practices applied into the Application
 - This application using the MVVM with a little bit of Clean Architecture. <br/>
-- Other design patterns: Protocol-Delegate, Singleton, Dependency Injection.
+- Other design patterns: Singleton, Dependency Injection.
 
 ### Source code structure, libraries, and frameworks
 - The structure of the project can be listed as below:
-```shell
+```swift
 .
 ├── MyWeather
-│   ├── Application	<- Anything related to the core of the App
-│   │   ├── Base		<- Contains AppDelegate (or @main App in SwiftUI)
-│   │   └── Config		<- Any client configuration
+│   ├── Application	// Anything related to the core of the App
+│   │   ├── Base		// Contains AppDelegate (or @main App in SwiftUI)
+│   │   └── Config		// Any client configuration
 │   │       ├── Info.plist
-│   │       ├── Production.xcconfig	<- Server url, bundleID, app name, app version
-│   │       ├── Sandbox.xcconfig	<- Same, to seperate different app's variants
-│   │       └── Config.swift		<- API Key(s), default values
-│   ├── Infrastructure	<- Handle network tasks, enums, high severity methods
-│   ├── Modules		<- Any feature will be implemented here
+│   │       ├── Production.xcconfig	// Server url, bundleID, app name, app version
+│   │       ├── Sandbox.xcconfig	// Same, to seperate different app's variants
+│   │       └── Config.swift		// API Key(s), default values
+│   ├── Infrastructure	// Handle network tasks, enums, high severity methods
+│   ├── Modules		// Any feature will be implemented here
 │   │   └── <Any module name>
 │   │       ├── Model
 │   │       ├── View
 │   │       └── ViewModel
 │   ├── Resources
-│   │   ├── Assets.xcassets	<- Local images/assets
-│   │   └── Localizable		<- String files for multi-language
+│   │   ├── Assets.xcassets	// Local images/assets
+│   │   └── Localizable		// String files for multi-language
 │   └── Utilities
-│       └── Extensions		<- Extend types
+│       └── Extensions		// Extend types
 ├── MyWeather.xcodeproj
-├── MyWeatherTests	<- Contains unit tests for any modules
-└── README.md		<- This file
+├── MyWeatherTests	// Contains unit tests for any modules
+└── README.md		// This file
 
 ```
 - External libraries: Alamofire (for network tasks) and Kingfisher (for image loading & caching). Install via Swift Package Manager (SPM).
