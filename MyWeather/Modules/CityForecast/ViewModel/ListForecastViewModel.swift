@@ -53,4 +53,17 @@ final class ListForecastViewModel: ObservableObject {
     func onActionCancelButton() {
         showCancelButton = false
     }
+    
+    func getListDaysForecast() -> [ItemCityForecastModel] {
+        if let model = listForecastModel {
+            return model.listDays
+        }
+        else {
+            return []
+        }
+    }
+    
+    func getItemForecastView(from item: ItemCityForecastModel) -> ItemCityForecastView {
+        ItemCityForecastView(forecastModel: item, timeZone: listForecastModel?.timeZone ?? TimeZone.current, currentUnit: currentUnit)
+    }
 }

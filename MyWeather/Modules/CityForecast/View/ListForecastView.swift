@@ -44,17 +44,13 @@ struct ListForecastView: View {
                         }
                     }
                     .padding(EdgeInsets(top: 2, leading: 16, bottom: 8, trailing: 16)).animation(.default)
-
-                    if let model = viewModel.listForecastModel {
-                        List(model.listDays) { item in
-                            ItemCityForecastView(forecastModel: item, timeZone: model.timeZone, currentUnit: viewModel.currentUnit)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        .listStyle(.plain).environment(\.defaultMinListRowHeight, 160)
+                
+                    List(viewModel.getListDaysForecast()) { item in
+                        viewModel.getItemForecastView(from: item)
+                            .listRowInsets(EdgeInsets())
+                            .frame(maxHeight: .infinity)
                     }
-                    else {
-                        List {}
-                    }
+                    .listStyle(.plain).environment(\.defaultMinListRowHeight, 160)
                     
                 }
                 .navigationBarTitle(Text("Weather Forecast"))

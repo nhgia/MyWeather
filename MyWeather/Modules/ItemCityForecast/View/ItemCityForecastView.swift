@@ -13,7 +13,7 @@ struct ItemCityForecastView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack{
+            HStack {
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text(viewModel.dateString)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -26,16 +26,20 @@ struct ItemCityForecastView: View {
                     Text(viewModel.desc)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 12)).frame(width: geometry.size.width * 0.75)
+                .frame(width: geometry.size.width * 0.75)
+                .padding(EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 0))
                 
                 KFImage(URL(string: viewModel.icon)).placeholder {
-                    Image(systemName: "cloud").resizable().aspectRatio(1, contentMode: .fit).frame(width: geometry.size.width * 0.07)
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                        .scaleEffect(1)
                 }
                 .cancelOnDisappear(true)
                 .cacheMemoryOnly()
                 .resizable()
                 .aspectRatio(1, contentMode: .fit)
                 .frame(width: geometry.size.width * 0.15)
+                .clipped()
             }
         }.background(Color.init(UIColor.systemGray3))
     }
@@ -50,6 +54,6 @@ struct ItemCityForecast_Previews: PreviewProvider {
     
     static var previews: some View {
         return ItemCityForecastView(forecastModel: ItemCityForecastModel(), timeZone: TimeZone.current, currentUnit: .celsius)
-          .environment(\.colorScheme, .light).previewLayout(.fixed(width: 400, height: 150))
+          .environment(\.colorScheme, .light).previewLayout(.fixed(width: 400, height: 180))
     }
 }
