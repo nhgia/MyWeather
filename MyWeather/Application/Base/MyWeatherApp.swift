@@ -11,7 +11,8 @@ import SwiftUI
 struct MyWeatherApp: App {
     var body: some Scene {
         WindowGroup {
-            ListForecastView()
+            let networkRequest = NetworkRequest<ListForecastModel>()
+            ListForecastView(networkReq: networkRequest)
         }
     }
 }

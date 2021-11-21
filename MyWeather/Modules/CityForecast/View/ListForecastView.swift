@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct ListForecastView: View {
-    @StateObject private var viewModel: ListForecastViewModel = ListForecastViewModel()
+    @StateObject private var viewModel: ListForecastViewModel
+    
+    init(networkReq: NetworkRequest<ListForecastModel>) {
+        let vm = ListForecastViewModel(networkRequest: networkReq)
+        _viewModel = StateObject(wrappedValue: vm)
+    }
     
     var body: some View {
         NavigationView {
@@ -74,7 +79,8 @@ struct ListForecastView: View {
 
 struct ListForecastView_Previews: PreviewProvider {
     static var previews: some View {
-        ListForecastView()
+        let networkRequest = NetworkRequest<ListForecastModel>()
+        ListForecastView(networkReq: networkRequest)
           .environment(\.colorScheme, .light)
 //
 //            ListForecastView()

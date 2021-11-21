@@ -8,7 +8,7 @@
 import Foundation
 final class ListForecastViewModel: ObservableObject {
     //MARK: - Attributes
-    private let networkRequest = NetworkRequest<ListForecastModel>()
+    private let networkRequest: NetworkRequest<ListForecastModel>
     
     @Published var listForecastModel: ListForecastModel?
     @Published var searchText = ""
@@ -25,6 +25,9 @@ final class ListForecastViewModel: ObservableObject {
     var bindingDataChanged: CallBack?
     
     //MARK: - Initialization
+    init(networkRequest: NetworkRequest<ListForecastModel>) {
+        self.networkRequest = networkRequest
+    }
     
     //MARK: - Methods
     func fetchListForecast() {

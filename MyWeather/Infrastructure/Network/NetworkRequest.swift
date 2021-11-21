@@ -7,7 +7,8 @@
 
 import Foundation
 import Alamofire
-class NetworkRequest<GenericType: Decodable> {
+
+final class NetworkRequest<GenericType: Decodable> {
     let sessionManager: Session = {
         let configuration = URLSessionConfiguration.af.default
         configuration.timeoutIntervalForRequest = 10
