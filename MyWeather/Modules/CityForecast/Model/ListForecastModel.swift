@@ -8,7 +8,7 @@
 import Foundation
 struct ListForecastModel: Decodable {
     var listDays: [ItemCityForecastModel]
-    var timeZone: TimeZone
+    var timeZone: Int
     var name: String
     
     enum CodingKeys: String, CodingKey {
@@ -27,12 +27,11 @@ struct ListForecastModel: Decodable {
         self.listDays = (try? values.decode(Array<ItemCityForecastModel>.self, forKey: .listDays)) ?? []
         
         if let cityNested = try? values.nestedContainer(keyedBy: CityCodingKeys.self, forKey: .city) {
-            let timeZoneSec = (try? cityNested.decode(Int.self, forKey: .timeZone)) ?? 0
-            self.timeZone = TimeZone(secondsFromGMT: timeZoneSec) ?? TimeZone.current
+            self.timeZone = (try? cityNested.decode(Int.self, forKey: .timeZone)) ?? 0
             self.name = (try? cityNested.decode(String.self, forKey: .name)) ?? ""
         }
         else {
-            self.timeZone = TimeZone.current
+            self.timeZone = 0
             self.name = ""
         }
     }

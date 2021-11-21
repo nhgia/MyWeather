@@ -51,11 +51,11 @@ final class ItemCityForecastViewModel: ObservableObject {
     }
     
     //MARK: - Initialization
-    init(forecastModel: ItemCityForecastModel, timeZone: TimeZone, currentUnit: UnitType) {
+    init(forecastModel: ItemCityForecastModel, timeZone: Int, currentUnit: UnitType) {
         self.forecastModel = forecastModel
         self.dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, dd MMM yyyy"
-        dateFormatter.timeZone = timeZone
+        dateFormatter.timeZone  = TimeZone(secondsFromGMT: timeZone) ?? TimeZone.current
         self.currentUnit = currentUnit
         
         self.date = dateString

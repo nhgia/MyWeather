@@ -9,10 +9,10 @@ import Foundation
 import Alamofire
 
 struct NetworkEndpoints {
-    static func listWeather(citySearchName: String, unit: UnitType) -> NetworkEndpoint {
+    static func listWeather(citySearchName: String, unit: UnitType, numberOfDays: Int) -> NetworkEndpoint {
         let queryParams: Parameters = [
             "q": citySearchName,
-            "cnt": 7,
+            "cnt": numberOfDays,
             "appid": Configs.backendId,
             "units": unit.rawValue
         ]

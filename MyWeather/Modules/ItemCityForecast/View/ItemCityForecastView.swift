@@ -44,7 +44,7 @@ struct ItemCityForecastView: View {
         }.background(Color.init(UIColor.systemGray3))
     }
     
-    init(forecastModel: ItemCityForecastModel, timeZone: TimeZone, currentUnit: UnitType) {
+    init(forecastModel: ItemCityForecastModel, timeZone: Int, currentUnit: UnitType) {
         let itemViewModel = ItemCityForecastViewModel(forecastModel: forecastModel, timeZone: timeZone, currentUnit: currentUnit)
         _viewModel = StateObject(wrappedValue: itemViewModel)
     }
@@ -53,7 +53,7 @@ struct ItemCityForecastView: View {
 struct ItemCityForecast_Previews: PreviewProvider {
     
     static var previews: some View {
-        return ItemCityForecastView(forecastModel: ItemCityForecastModel(), timeZone: TimeZone.current, currentUnit: .celsius)
+        return ItemCityForecastView(forecastModel: ItemCityForecastModel(), timeZone: 0, currentUnit: .celsius)
           .environment(\.colorScheme, .light).previewLayout(.fixed(width: 400, height: 180))
     }
 }
