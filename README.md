@@ -14,6 +14,33 @@ My name is Gia Nguyen. If you have any question or further information, feel fre
 - Other design patterns: Protocol-Delegate, Singleton, Dependency Injection.
 
 ### Source code structure, libraries, and frameworks
+- The structure of the project can be listed as below:
+```shell
+.
+├── MyWeather
+│   ├── Application	<- Anything related to the core of the App
+│   │   ├── Base		<- Contains AppDelegate (or @main App in SwiftUI)
+│   │   └── Config		<- Any client configuration
+│   │       ├── Info.plist
+│   │       ├── Production.xcconfig	<- Server url, bundleID, app name, app version
+│   │       ├── Sandbox.xcconfig	<- Same, to seperate different app's variants
+│   │       └── Config.swift		<- API Key(s), default values
+│   ├── Infrastructure	<- Handle network tasks, enums, high severity methods
+│   ├── Modules		<- Any feature will be implemented here
+│   │   └── <Any module name>
+│   │       ├── Model
+│   │       ├── View
+│   │       └── ViewModel
+│   ├── Resources
+│   │   ├── Assets.xcassets	<- Local images/assets
+│   │   └── Localizable		<- String files for multi-language
+│   └── Utilities
+│       └── Extensions		<- Extend types
+├── MyWeather.xcodeproj
+├── MyWeatherTests	<- Contains unit tests for any modules
+└── README.md		<- This file
+
+```
 - External libraries: Alamofire (for network tasks) and Kingfisher (for image loading & caching). Install via Swift Package Manager (SPM).
 - UI framework is SwiftUI. It is fast, modern, and easy to implement. Dark mode supported.
 
@@ -24,7 +51,9 @@ My name is Gia Nguyen. If you have any question or further information, feel fre
 <p align="center">
     <img width="40%" src="https://user-images.githubusercontent.com/40845574/142769320-d466c25d-0c10-4975-9f9c-39fef41511b3.png">
 </p>
-4. Press Command + R or click the Play button to run the application. Please choose a simulator with iOS 14 or higher. The default build configuration is "Sandbox", simulates the environment for developing, you can change it in the "Edit scheme" to either "Sandbox" or "Production".
+4. Press Command + R or click the Play button to run the application. Please choose a simulator with iOS 14 or higher. The default build configuration is "Sandbox", simulates the environment for developing. You can change it in the "Edit scheme" to either "Sandbox" or "Production".
+<p align="center">
+    <img width="80%" src="https://user-images.githubusercontent.com/40845574/142770000-4982ba44-9f1c-4854-8166-b16865da5bc7.png">
 
 ### Checklist
 - [x] Programming language: Swift.

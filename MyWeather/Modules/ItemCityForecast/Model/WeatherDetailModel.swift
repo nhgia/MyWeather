@@ -27,4 +27,12 @@ struct WeatherDetailModel: Decodable {
         let iconPath = try values.decode(String.self, forKey: .icon)
         self.icon = ConfigKey.getBackendBaseImageUrl() + iconPath + ".png"
     }
+    
+    //for debugging purpose only
+    init() {
+        self.id = 0
+        self.main = ""
+        self.description = "Sample"
+        self.icon = ConfigKey.getBackendBaseImageUrl() + "10d" + ".png"
+    }
 }

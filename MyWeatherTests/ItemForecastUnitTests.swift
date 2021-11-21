@@ -6,17 +6,21 @@
 //
 
 import XCTest
-
+@testable import MyWeather
 class ItemForecastUnitTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    var viewModel: ItemCityForecastViewModel!
+    
+    override func setUp() {
+        viewModel = .init(forecastModel: ItemCityForecastModel(), timeZone: 25200, currentUnit: .celsius)
     }
     
-    
+    func test_IsValidateItemForecastViewModel() {
+        XCTAssertNotNil(URL(string: viewModel.icon))
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "'Date:' E, dd MMM yyyy"
+        XCTAssertNotNil(dateFormatterGet.date(from: viewModel.date))
+    }
 
 }

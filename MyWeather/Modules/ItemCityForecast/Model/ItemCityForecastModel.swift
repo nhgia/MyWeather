@@ -50,7 +50,7 @@ struct ItemCityForecastModel: Decodable, Identifiable {
         self.pressure = 1000
         self.temp = TempDayModel()
         
-        self.weatherDetails = []
+        self.weatherDetails = [WeatherDetailModel()]
     }
     
 }

@@ -18,7 +18,7 @@ final class ListForecastViewModel: ObservableObject {
     
     fileprivate(set) var alertMessage: String = ""
     let currentUnit:UnitType = .celsius
-    let numberOfDays: Int = 7
+    var numberOfDays: Int = 7
     
     typealias CallBack = () -> Void
     
@@ -30,18 +30,20 @@ final class ListForecastViewModel: ObservableObject {
     }
     
     //MARK: - Methods
-    func fetchListForecast() {
+    func fetchListForecast(completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         isLoading = true
         let endpoint = NetworkEndpoints.listWeather(citySearchName: searchText, unit: currentUnit, numberOfDays: numberOfDays)
         networkRequest.request(endpoint: endpoint) { [weak self] responseObject, statusResult in
             self?.isLoading = false
             if let responseObject = responseObject, let statusResult = statusResult, statusResult.responseCode == NetworkResultCode.success.rawValue {
                 self?.listForecastModel = responseObject
+                completion?(true)
             }
             else {
                 self?.alertMessage = statusResult?.message ?? "Unknown error"
                 self?.showingAlert = true
                 self?.listForecastModel = nil
+                completion?(false)
             }
         }
     }

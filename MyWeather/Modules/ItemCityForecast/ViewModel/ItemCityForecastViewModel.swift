@@ -24,29 +24,29 @@ final class ItemCityForecastViewModel: ObservableObject {
     var bindingDataChanged: CallBack?
     
     //MARK: - Computed properties
-    var dateString: String {
+    fileprivate var dateString: String {
         return "Date: " + dateFormatter.string(from: forecastModel.dateTime)
     }
     
-    var avgTempString: String {
+    fileprivate var avgTempString: String {
         let avgTemp: Double = averageOf(forecastModel.temp.day, forecastModel.temp.evening, forecastModel.temp.morning, forecastModel.temp.night)
         return "Average Temperature: \(Int(avgTemp))" + currentUnit.getStringRepresent()
     }
     
-    var pressureString: String {
+    fileprivate var pressureString: String {
         return "Pressure: \(forecastModel.pressure)"
     }
     
-    var humidString: String {
+    fileprivate var humidString: String {
         return "Humidity: \(forecastModel.humidity)%"
     }
     
-    var descString: String {
+    fileprivate var descString: String {
         let desc = forecastModel.weatherDetails.first?.description ?? "N/A"
         return "Description: " + desc
     }
     
-    var iconString: String {
+    fileprivate var iconString: String {
         forecastModel.weatherDetails.first?.icon ?? ""
     }
     

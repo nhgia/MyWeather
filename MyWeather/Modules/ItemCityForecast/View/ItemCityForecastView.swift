@@ -15,7 +15,7 @@ struct ItemCityForecastView: View {
         GeometryReader { geometry in
             HStack {
                 VStack(alignment: .leading, spacing: 6.0) {
-                    Text(viewModel.dateString)
+                    Text(viewModel.date)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(viewModel.avgTemp)
                         .frame(maxWidth: .infinity, alignment: .leading)

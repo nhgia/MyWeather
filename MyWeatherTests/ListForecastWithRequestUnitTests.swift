@@ -22,6 +22,7 @@ class ListForecastWithRequestUnitTests: XCTestCase {
     }
 
     func test_RequestListForecastValidateResponse() {
+        let expectation = expectation(description: "Success response in less than 5 seconds")
         let numberOfDays:Int = 3
         let endpoint = NetworkEndpoints.listWeather(citySearchName: "Saigon", unit: .fahrenheit, numberOfDays: numberOfDays)
         listForecastNetworkRequest.request(endpoint: endpoint) { responseObject, resultCodeObject in
@@ -45,18 +46,18 @@ class ListForecastWithRequestUnitTests: XCTestCase {
             else {
                 XCTAssertTrue(false)
             }
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 5.0, handler: nil)
     }
     
     func test_RequestListForecastErrorResponse() {
+        let expectation = expectation(description: "Failure response in less than 5 seconds")
         let endpoint = NetworkEndpoints.listWeather(citySearchName: "sfghjaogharso", unit: .fahrenheit, numberOfDays: 7)
-        listForecastNetworkRequest.request(endpoint: endpoint) { responseObject, resultCodeObject in
+        listForecastNetworkRequest.request(endpoint: endpoint) { _, resultCodeObject in
             // Every response have a valid result object which includes: cod, mess
             // Even the default value have this object, therefore it cannot be nil
             XCTAssertNotNil(resultCodeObject)
-            
-            // This is a invalid request, response object is nil
-            XCTAssertNil(responseObject)
             
             // Check cod != "200": everything but success
             XCTAssertNotEqual(resultCodeObject?.responseCode, NetworkResultCode.success.rawValue)
@@ -64,15 +65,15 @@ class ListForecastWithRequestUnitTests: XCTestCase {
             // Message can be changed based on the requirement and how we want to dynamic show to users.
             // Therefore cannot compare to any specific string, just check nil.
             XCTAssertNotNil(resultCodeObject?.message)
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 5.0, handler: nil)
     }
     
     func test_RequestListForecastNotTimeout() {
         let expectation = expectation(description: "Response in less than 5 seconds")
         let endpoint = NetworkEndpoints.listWeather(citySearchName: "Saigon", unit: .celsius, numberOfDays: 7)
-        listForecastNetworkRequest.request(endpoint: endpoint) { responseObject, resultCodeObject in
-            // Every response have a valid result object which includes: cod, mess
-            // Even the default value have this object, therefore it cannot be nil
+        listForecastNetworkRequest.request(endpoint: endpoint) { _, resultCodeObject in
             XCTAssertNotNil(resultCodeObject)
             expectation.fulfill()
         }
